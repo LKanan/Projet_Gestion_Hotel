@@ -8,9 +8,9 @@ public class Chambre {
     private int prix;
     private String description;
     private String type;
-    private static Scanner clav = new Scanner(System.in);
+    static Scanner clav = new Scanner(System.in);
 
-    static List<Chambre> chambres = new ArrayList<>();
+    private static List<Chambre> chambres = new ArrayList<>();
 
     private Chambre(int id, String nom, int prix, String description, String type) {
         this.id = id;
@@ -75,10 +75,11 @@ public class Chambre {
         for (int i = 0; i < chambres.size(); i++) {
             if (chambres.get(i).getId() == id) {
                 chambres.remove(i);
-                break;
+                System.out.println("Chambre supprimée avec succès !");
+                return;
             }
         }
-        System.out.println("Chambre supprimée avec succès !");
+        System.out.println("Aucune réservation trouvée avec cet ID.");
     }
 
     public static void afficherToutesChambres() {
