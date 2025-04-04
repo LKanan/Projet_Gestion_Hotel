@@ -21,7 +21,7 @@ public class Admin extends Personne {
     public void afficherMenuAdmin(List<Admin> adminList, List<Utilisateur> utilisateurList) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("\n--- Menu Administrateur ---");
+            System.out.println("\n\t Menu Administrateur \n\t --------------------------- \n\t");
             System.out.println("1. Afficher tous les  Clients");
             System.out.println("2. Afficher Un Seul Clients");
             System.out.println("3. Afficher les reservations");
@@ -36,7 +36,7 @@ public class Admin extends Personne {
 
             switch (choix) {
                 case 1:
-                    System.out.println("\n--- Tous les clients ---");
+                    System.out.println("\n\tTous les clients \n\t ---------------------- \n\t ");
                     for (Utilisateur utilisateur : utilisateurList) {
                         System.out.println("ID: " + utilisateur.getId() +
                                 ", Nom: " + utilisateur.getNom() +

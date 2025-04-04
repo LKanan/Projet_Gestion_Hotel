@@ -25,7 +25,10 @@ public class Utilisateur extends Personne {
         while (true) {
             System.out.println("\n--- Menu Utilisateur ---");
             System.out.println("1. Voir mon profil");
-            System.out.println("2. Déconnexion");
+            System.out.println("2. Faire une reservation");
+            System.out.println("3. Voir mon profil");
+            System.out.println("4. Voir mon profil");
+            System.out.println("5. Déconnexion");
             System.out.print("Choisissez une option : ");
             int choix = scanner.nextInt();
 

@@ -17,11 +17,11 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("\n Système d'Authentification \n\t ------------------------- \t ");
-            System.out.println("\n\t 1. Se connecter");
-            System.out.println("\n\t 2. Créer un compte");
-            System.out.println("\n\t 3. Quitter");
-            System.out.print("Choisissez une option : ");
+            System.out.println("\n\t Système d'Authentification \n\t ------------------------- \t ");
+            System.out.println("\n\t 1. Se connecter    \t");
+            System.out.println("\n\t 2. Créer un compte ");
+            System.out.println("\n\t 3. Quitter          \n\t -------------------------\t");
+            System.out.print("\nChoisissez une option : ");
             int choix = scanner.nextInt();
             scanner.nextLine();
 
