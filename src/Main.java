@@ -1,15 +1,10 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+    public static void main(String [] args){
+        Chambre.addChamber("Chambre 1", 100, "Description 1", "Type 1");
+        Chambre.addChamber("Chambre 2", 200, "Description 2", "Type 2");
+        Chambre.addChamber("Chambre 3", 300, "Description 3", "Type 3");
+        for(int i = 0; i< Chambre.chambres.size(); i++){
+            System.out.println(Chambre.chambres.get(i).toString());
         }
     }
 }
