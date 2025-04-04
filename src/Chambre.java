@@ -68,7 +68,10 @@ public class Chambre {
         System.out.println("Chambre ajoutée avec succès !\n--------------------------------------------\n");
     }
 
-    public static void removeChamber(int id) {
+    public static void supprimerChamber() {
+        System.out.println("Suppression d'une chambre\n--------------------------------------------\n");
+        System.out.println("Entrez le numero de la chambre à supprimer: ");
+        int id = clav.nextInt();
         for (int i = 0; i < chambres.size(); i++) {
             if (chambres.get(i).getId() == id) {
                 chambres.remove(i);
@@ -78,11 +81,23 @@ public class Chambre {
         System.out.println("Chambre supprimée avec succès !");
     }
 
+    public static void afficherChambres() {
+        System.out.println("Liste des chambres\n--------------------------------------------\n");
+        if (chambres.size() == 0) {
+            System.out.println("Aucune chambre disponible.");
+        }
+        else {
+            for (Chambre chambre : chambres) {
+                System.out.println(chambre);
+            }
+        }
+    }
+
     @Override
     public String toString() {
-        return "" + id + "." +
+        return "Numero: " + id + "." +
                 "\n\tNom: " + nom +
-                "\n\tPrix: " + prix +
+                "\n\tPrix: " + prix + "$" +
                 "\n\tDescription: " + description +
                 "\n\tType: " + type+
                 "\n===============================================\n";
