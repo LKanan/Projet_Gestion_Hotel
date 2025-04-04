@@ -46,13 +46,9 @@ public class Admin extends Personne {
                     break;
 
                 case 2:
-                    System.out.println("\n--- Utilisateur ---");
-                    for (Admin admin : adminList) {
-                        System.out.println("ID: " + admin.getId() +
-                                ", Nom: " + admin.getNom() +
-                                ", Email: " + admin.getEmail() +
-                                ", Matricule: " + admin.getMatricule());
-                    }
+                    System.out.println("\n--- Afficher Un Seul Client ---");
+                    int idUtilisateur = scanner.nextInt();
+                    Utilisateur.afficherUnSeulClient(idUtilisateur);
                     break;
                 case 3:
                     System.out.println("Afficher les reservations");
@@ -62,14 +58,23 @@ public class Admin extends Personne {
                     System.out.println("Afficher une seule reservations");
                 case 5:
                     System.out.println("Afficher les chambres");
-                    for (Chambre chambre:)
+                    Chambre.afficherToutesChambres();
                     break;
                 case 6:
                     System.out.println("Afficher une seule chambre par l'id");
+                    System.out.println("Entrez l'id de la chambre : ");
+                    int idChambre = scanner.nextInt();
+                    Chambre.afficherUneChambre(idChambre);
+                    break;
                 case 7:
                     System.out.println("Creer une chambre");
+                    Chambre.ajouterChamber();
+                    break;
                 case 8:
                     System.out.println("Supprimer Une Chambre par l'id :");
+                    int idChambreSupprimer = scanner.nextInt();
+                    System.out.println("Entrer l'id de la chambre a supprimer : ");
+                    Chambre.supprimerChamber();
                 case 9:
                     System.out.println("Déconnexion réussie. Retour au menu principal.");
                     return; // Quitter le menu admin

@@ -3,23 +3,27 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    public static int idConected;
+
     public static void main(String[] args) {
+
         List<Admin> adminList = new ArrayList<>();
-        List<Utilisateur> utilisateurList = new ArrayList<>();
+
+
 
         adminList.add(new Admin(1, "rooney", "admin@gmail.com", "P@55word", "ADMIN", "ADM001"));
-        utilisateurList.add(new Utilisateur(1, "user", "user@gmail.com", "P@55word", "USER", "paris"));
+        Utilisateur.utilisateurList.add(new Utilisateur(1, "user", "user@gmail.com", "P@55word", "USER", "paris"));
 
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("\n--- Système d'Authentification ---");
-            System.out.println("1. Se connecter");
-            System.out.println("2. Créer un compte");
-            System.out.println("3. Quitter");
+            System.out.println("\n Système d'Authentification \n\t ------------------------- \t ");
+            System.out.println("\n\t 1. Se connecter");
+            System.out.println("\n\t 2. Créer un compte");
+            System.out.println("\n\t 3. Quitter");
             System.out.print("Choisissez une option : ");
             int choix = scanner.nextInt();
-            scanner.nextLine(); // Consomme la ligne restante
+            scanner.nextLine();
 
             switch (choix) {
                 case 1:
@@ -29,11 +33,11 @@ public class Main {
                     String password = scanner.nextLine();
 
                     Personne personne = new Personne() {
-                    }.seConnecter(adminList, utilisateurList, email, password);
+                    }.seConnecter(adminList,Utilisateur.utilisateurList, email, password);
 
                     if (personne != null) {
                         if (personne instanceof Admin) {
-                            ((Admin) personne).afficherMenuAdmin(adminList, utilisateurList);
+                            ((Admin) personne).afficherMenuAdmin(adminList, Utilisateur.utilisateurList);
                         } else if (personne instanceof Utilisateur) {
                             ((Utilisateur) personne).afficherMenuUtilisateur();
                         }
@@ -60,7 +64,7 @@ public class Main {
                     } else {
                         System.out.print("Adresse : ");
                         String adresse = scanner.nextLine();
-                        utilisateurList.add(new Utilisateur(utilisateurList.size() + 1, nom, nouveauEmail, nouveauPassword, "USER", adresse));
+                        Utilisateur.utilisateurList.add(new Utilisateur(Utilisateur.utilisateurList.size() + 1, nom, nouveauEmail, nouveauPassword, "USER", adresse));
                         System.out.println("Compte utilisateur créé !");
                     }
                     break;

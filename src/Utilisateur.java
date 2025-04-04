@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Utilisateur extends Personne {
     private String adresse;
+    static List<Utilisateur>  utilisateurList = new ArrayList<>();
 
     public Utilisateur(int id, String nom, String email, String password, String role, String adresse) {
         super(id, nom, email, password, role);
@@ -44,4 +47,14 @@ public class Utilisateur extends Personne {
             }
         }
     }
+
+    public static void afficherUnSeulClient(int id){
+        for (Utilisateur utilisateur : utilisateurList) {
+            if (utilisateur.getId() == id) {
+                System.out.println(utilisateur);
+            }
+        }
+    }
+
+
 }
