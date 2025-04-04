@@ -88,6 +88,13 @@ public class Chambre {
         }
         else {
             for (Chambre chambre : chambres) {
+                System.out.println(chambre.nom + " : " + chambre.prix + "$");
+            }
+        }
+    }
+    public static void afficherChambre(int id){
+        for (Chambre chambre : chambres) {
+            if (chambre.getId() == id) {
                 System.out.println(chambre);
             }
         }
@@ -95,7 +102,7 @@ public class Chambre {
 
     @Override
     public String toString() {
-        return "Numero: " + id + "." +
+        return "Chambre numero: " + id + "." +
                 "\n\tNom: " + nom +
                 "\n\tPrix: " + prix + "$" +
                 "\n\tDescription: " + description +
