@@ -41,7 +41,7 @@ public class Chambre {
     }
 
 //    public static void addChamber(String nom, int prix, String description, String type) {
-    public static void addChamber() {
+    public static void ajouterChamber() {
         String nomChambre;
         int prixChambre;
         String descriptionChambre;
@@ -81,7 +81,7 @@ public class Chambre {
         System.out.println("Chambre supprimée avec succès !");
     }
 
-    public static void afficherChambres() {
+    public static void afficherToutesChambres() {
         System.out.println("Liste des chambres\n--------------------------------------------\n");
         if (chambres.size() == 0) {
             System.out.println("Aucune chambre disponible.");
@@ -92,7 +92,7 @@ public class Chambre {
             }
         }
     }
-    public static void afficherChambre(int id){
+    public static void afficherUneChambre(int id){
         for (Chambre chambre : chambres) {
             if (chambre.getId() == id) {
                 System.out.println(chambre);

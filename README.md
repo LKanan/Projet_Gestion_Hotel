@@ -11,3 +11,13 @@
 3. Gestion des chambres
    - Ajouter une chambre
    - Afficher les chambres
+
+4. Fonctionnalités de l'admin
+   - Afficher les clients
+   - Afficher un seul clients
+   - Afficher les reservations
+   - Afficher une seule reservations
+   - Afficher les chambres
+   - Afficher une seule chambre par l'id
+   - Creer une chambre
+   - Supprimer une chambre par l'id
