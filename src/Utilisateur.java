@@ -23,12 +23,13 @@ public class Utilisateur extends Personne {
     public void afficherMenuUtilisateur() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("\n--- Menu Utilisateur ---");
-            System.out.println("1. Voir mon profil");
-            System.out.println("2. Faire une reservation");
-            System.out.println("3. Voir mon profil");
-            System.out.println("4. Voir mon profil");
-            System.out.println("5. Déconnexion");
+            System.out.println("\n\t Menu Utilisateur \n\t ---------------------------\n\t");
+            System.out.println("\n\t1. Voir mon profil\n\t");
+            System.out.println("\n\t2. Faire une reservation\n\t");
+            System.out.println("\n\t3. Voir Mes reservations\n\t");
+            System.out.println("\n\t4. Afficher Une Reservation\n\t");
+            System.out.println("\n\t5. Supprimer Une Reservation\n\t");
+            System.out.println("\n\t6. Déconnexion\n\t");
             System.out.print("Choisissez une option : ");
             int choix = scanner.nextInt();
 
@@ -40,8 +41,27 @@ public class Utilisateur extends Personne {
                     System.out.println("Email: " + this.getEmail());
                     System.out.println("Adresse: " + this.getAdresse());
                     break;
-
                 case 2:
+                    System.out.println("\n\t Faire Une Reservation \n\t ---------------------- \n\t ");
+                    Reservations.ajouterReservation(this.getId());
+                    break;
+                case 3:
+                    System.out.println("\n\t Mes Reservations \n\t ---------------------- \n\t ");
+                    Reservations.afficherReservations();
+                    break;
+                case 4:
+                    System.out.println("\n\t Afficher Une Reservation \n\t ---------------------- \n\t ");
+                    int idReservation = scanner.nextInt();
+                    Reservations.afficherUneReservation(idReservation);
+                    break;
+
+                case 5:
+                    System.out.println("\n\t Supprimer Une Reservation \n\t ---------------------- \n\t ");
+                    int idReservationSupprimer = scanner.nextInt();
+                    Reservations.supprimerReservation(idReservationSupprimer);
+                    break;
+
+                case 6:
                     System.out.println("Déconnexion réussie. Retour au menu principal.");
                     return; // Quitter le menu utilisateur
 

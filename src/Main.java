@@ -45,8 +45,8 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println("\n--- Créer un compte ---");
-                    System.out.print("1. Administrateur\n2. Utilisateur\nVotre choix : ");
+                    System.out.println("\n\t Créer un compte \n\t ---------------------- \n\t");
+                    System.out.print("\n\t1. Administrateur\n\t2. Utilisateur\n\tVotre choix : ");
                     int type = scanner.nextInt();
                     scanner.nextLine();
                     System.out.print("Nom : ");
