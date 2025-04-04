@@ -75,7 +75,7 @@ public class Reservations {
         }
         System.out.println("Aucune réservation trouvée avec cet ID.");
     }
-
+//done
     static void supprimerReservation(int id) {
         for (int i = 0; i < reservations.size(); i++) {
             if (reservations.get(i).getId() == id) {
