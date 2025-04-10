@@ -1,7 +1,6 @@
 package persistance;
 
 import data.Chambre;
-import data.Personne;
 import data.Reservations;
 import data.Utilisateur;
 
