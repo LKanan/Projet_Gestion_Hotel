@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Utilisateur extends Personne {
     private String adresse;
-    static List<Utilisateur>  utilisateurList = new ArrayList<>();
+    public static List<Utilisateur>  utilisateurList = new ArrayList<>();
 
     public Utilisateur(int id, String nom, String email, String password, String role, String adresse) {
         super(id, nom, email, password, role);
