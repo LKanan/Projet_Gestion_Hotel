@@ -1,0 +1,20 @@
+[
+  {
+    "adresse": "paris",
+    "id": 1,
+    "nom": "user",
+    "email": "user@gmail.com",
+    "password": "P@55word",
+    "role": "USER",
+    "estConnecter": false
+  },
+  {
+    "adresse": "eee",
+    "id": 2,
+    "nom": "eeee",
+    "email": "eeee",
+    "password": "eeee",
+    "role": "USER",
+    "estConnecter": false
+  }
+]

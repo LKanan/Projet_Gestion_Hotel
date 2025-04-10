@@ -1,16 +1,17 @@
 package persistance;
 
-import data.Chambre;
-import data.Personne;
-import data.Reservations;
-import data.Utilisateur;
+import data.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface MainRepository {
     void saveUser(List<Utilisateur> user);
-
     public List<Utilisateur> loadUser();
+
+    void saveAdmin(List<Admin> admin);
+
+    public ArrayList<Admin> loadAdmin();
 
     void saveChambre(List<Chambre> chambre);
 

@@ -1,0 +1,82 @@
+[
+  {
+    "type": "admin",
+    "matricule": "ADM001",
+    "id": 1,
+    "nom": "rooney",
+    "email": "admin@gmail.com",
+    "password": "P@55word",
+    "role": "ADMIN",
+    "estConnecter": false
+  },
+  {
+    "type": "admin",
+    "matricule": "cwcw",
+    "id": 2,
+    "nom": "eee",
+    "email": "eee@gmail.com",
+    "password": "wdedewdw",
+    "role": "ADMIN",
+    "estConnecter": false
+  },
+  {
+    "type": "admin",
+    "matricule": "ADM001",
+    "id": 1,
+    "nom": "rooney",
+    "email": "admin@gmail.com",
+    "password": "P@55word",
+    "role": "ADMIN",
+    "estConnecter": false
+  },
+  {
+    "type": "admin",
+    "matricule": "efvefv",
+    "id": 2,
+    "nom": "rrroror",
+    "email": "eferver",
+    "password": "fvefvfv",
+    "role": "ADMIN",
+    "estConnecter": false
+  },
+  {
+    "type": "admin",
+    "matricule": "ADM001",
+    "id": 1,
+    "nom": "rooney",
+    "email": "admin@gmail.com",
+    "password": "P@55word",
+    "role": "ADMIN",
+    "estConnecter": false
+  },
+  {
+    "type": "admin",
+    "matricule": "efvefv",
+    "id": 2,
+    "nom": "rrroror",
+    "email": "eferver",
+    "password": "fvefvfv",
+    "role": "ADMIN",
+    "estConnecter": false
+  },
+  {
+    "type": "admin",
+    "matricule": "rtgrtrt",
+    "id": 3,
+    "nom": "fvdfvfvf",
+    "email": "vrbvrgbrt",
+    "password": "vrttr",
+    "role": "ADMIN",
+    "estConnecter": false
+  },
+  {
+    "type": "admin",
+    "matricule": "OFDSU",
+    "id": 4,
+    "nom": "Ignace",
+    "email": "Ignace@gmail.com",
+    "password": "IG",
+    "role": "ADMIN",
+    "estConnecter": false
+  }
+]

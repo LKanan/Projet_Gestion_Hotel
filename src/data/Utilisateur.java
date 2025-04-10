@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Utilisateur extends Personne {
+    private static  long serialVersionUID = 1L;
     private String adresse;
     public static List<Utilisateur>  utilisateurList = new ArrayList<>();
 

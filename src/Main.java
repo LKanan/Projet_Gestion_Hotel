@@ -1,6 +1,8 @@
 import data.Admin;
 import data.Personne;
 import data.Utilisateur;
+import persistance.AdminJsonRepository;
+import persistance.UserJsonRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +18,12 @@ public class Main {
     }
 
     public static void affichageMenuPrincipal() {
+        AdminJsonRepository adminJsonRepository = new AdminJsonRepository("Admin.json");
+        UserJsonRepository userJsonRepository = new UserJsonRepository("User.json");
         List<Admin> adminList = new ArrayList<>();
-
-
-
+        List<Utilisateur> userList = new ArrayList<>();
         adminList.add(new Admin(1, "rooney", "admin@gmail.com", "P@55word", "ADMIN", "ADM001"));
-        Utilisateur.utilisateurList.add(new Utilisateur(1, "user", "user@gmail.com", "P@55word", "USER", "paris"));
+        userList.add(new Utilisateur(1, "user", "user@gmail.com", "P@55word", "USER", "paris"));
 
         Scanner scanner = new Scanner(System.in);
 
@@ -69,11 +71,13 @@ public class Main {
                         System.out.print("Matricule : ");
                         String matricule = scanner.nextLine();
                         adminList.add(new Admin(adminList.size() + 1, nom, nouveauEmail, nouveauPassword, "ADMIN", matricule));
+                        adminJsonRepository.saveAdmin(adminList);
                         System.out.println("Compte administrateur créé !");
                     } else {
                         System.out.print("Adresse : ");
                         String adresse = scanner.nextLine();
-                        Utilisateur.utilisateurList.add(new Utilisateur(Utilisateur.utilisateurList.size() + 1, nom, nouveauEmail, nouveauPassword, "USER", adresse));
+                       Utilisateur.utilisateurList.add(new Utilisateur(Utilisateur.utilisateurList.size() + 1, nom, nouveauEmail, nouveauPassword, "USER", adresse));
+                        userJsonRepository.saveUser(Utilisateur.utilisateurList);
                         System.out.println("Compte utilisateur créé !");
                     }
                     break;

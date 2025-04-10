@@ -1,9 +1,12 @@
 package data;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
 public class Admin extends Personne {
+
+    private static  long serialVersionUID = 1L;
     private String matricule;
 
     public Admin(int id, String nom, String email, String password, String role, String matricule) {
