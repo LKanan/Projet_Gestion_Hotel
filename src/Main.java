@@ -11,6 +11,11 @@ public class Main {
 
     public static void main(String[] args) {
 
+        affichageMenuPrincipal();
+
+    }
+
+    public static void affichageMenuPrincipal() {
         List<Admin> adminList = new ArrayList<>();
 
 
@@ -83,4 +88,6 @@ public class Main {
             }
         }
     }
-}
+    }
+
+
