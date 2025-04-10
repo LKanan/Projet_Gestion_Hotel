@@ -1,10 +1,14 @@
 package data;
 
+import persistance.ChambreJsonRepository;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Chambre {
+public class Chambre implements Serializable {
+    private static  long serialVersionUID = 1L;
     private int id;
     private String nom;
     private int prix;
@@ -44,6 +48,7 @@ public class Chambre {
 
 //    public static void addChamber(String nom, int prix, String description, String type) {
     public static void ajouterChamber() {
+        ChambreJsonRepository jsonRepository = new ChambreJsonRepository("chambres.json");
         String nomChambre;
         int prixChambre;
         String descriptionChambre;
@@ -53,10 +58,11 @@ public class Chambre {
         nomChambre = clav.nextLine();
         System.out.println("Prix de la chambre: ");
         prixChambre = clav.nextInt();
+        clav.nextLine();
         System.out.println("Type de la chambre: ");
-        typeChambre = clav.next();
+        typeChambre = clav.nextLine();
         System.out.println("Description de la chambre: ");
-        descriptionChambre = clav.next();
+        descriptionChambre = clav.nextLine();
 
         if (chambres.size() == 0) {
             int id = 1;
@@ -67,6 +73,7 @@ public class Chambre {
             Chambre chambre = new Chambre(id, nomChambre, prixChambre, descriptionChambre, typeChambre);
             chambres.add(chambre);
         }
+        jsonRepository.saveChambre(chambres);
         System.out.println("Chambre ajoutée avec succès !\n--------------------------------------------\n");
     }
 

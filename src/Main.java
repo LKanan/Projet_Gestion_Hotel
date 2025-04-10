@@ -20,7 +20,7 @@ public class Main {
 
 
 
-        adminList.add(new Admin(1, "rooney", "admin@gmail.com", "P@55word", "ADMIN", "ADM001"));
+        adminList.add(new Admin(1, "rooney", "admin", "12345", "ADMIN", "ADM001"));
         Utilisateur.utilisateurList.add(new Utilisateur(1, "user", "user@gmail.com", "P@55word", "USER", "paris"));
 
         Scanner scanner = new Scanner(System.in);
