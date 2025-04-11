@@ -45,22 +45,23 @@ public class Utilisateur extends Personne {
                     break;
                 case 2:
                     System.out.println("\n\t Faire Une Reservation \n\t ---------------------- \n\t ");
-                    Reservations.ajouterReservation(this.getId());
+                    Reservation.ajouterReservation(this.getId());
                     break;
                 case 3:
                     System.out.println("\n\t Mes Reservations \n\t ---------------------- \n\t ");
-                    Reservations.afficherReservations();
+                    Reservation.afficherReservations();
                     break;
                 case 4:
                     System.out.println("\n\t Afficher Une Reservation \n\t ---------------------- \n\t ");
+                    System.out.println("Saisissez le numero de la reservation");
                     int idReservation = scanner.nextInt();
-                    Reservations.afficherUneReservation(idReservation);
+                    Reservation.afficherUneReservation(idReservation);
                     break;
 
                 case 5:
                     System.out.println("\n\t Supprimer Une Reservation \n\t ---------------------- \n\t ");
                     int idReservationSupprimer = scanner.nextInt();
-                    Reservations.supprimerReservation(idReservationSupprimer);
+                    Reservation.supprimerReservation(idReservationSupprimer);
                     break;
 
                 case 6:

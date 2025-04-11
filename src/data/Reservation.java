@@ -1,19 +1,25 @@
 package data;
 
+import persistance.ChambreJsonRepository;
+import persistance.ReservationJsonRepository;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
 
-public class Reservations {
+public class Reservation implements Serializable {
+    private static long serialVersionUID = 1L;
     private int id;
     private int idClient;
     private int idChambre;
     private LocalDate date;
-    private static List<Reservations> reservations = new ArrayList<>();
+    private static List<Reservation> reservations = new ArrayList<>();
     private static Scanner clav = new Scanner(System.in);
+    private static ReservationJsonRepository jsonRepository = new ReservationJsonRepository("Reservations.json");
 
-    private Reservations(int id, int idClient, int idChambre, LocalDate date) {
+    private Reservation(int id, int idClient, int idChambre, LocalDate date) {
         this.id = id;
         this.idClient = idClient;
         this.idChambre = idChambre;
@@ -40,28 +46,26 @@ public class Reservations {
         System.out.println("Faire une réservation\n--------------------------------------------\n");
         System.out.println("Saisissez le numero de la chambre: ");
         int idChambre = clav.nextInt();
+        clav.nextLine(); // Consommer le caractère de nouvelle ligne
         LocalDate date = LocalDate.now();
-        if (reservations.isEmpty()) {
-            int id = 1;
-            Reservations reservation = new Reservations(id, idClient, idChambre, date);
-            reservations.add(reservation);
-        }
-        else{
-            int id = reservations.get(reservations.size() - 1).getId() + 1;
-            Reservations reservation = new Reservations(id, idClient, idChambre, date);
-            reservations.add(reservation);
-        }
+
+        List<Reservation> reservationsExistantes = jsonRepository.loadReservation();
+        int id = reservationsExistantes.isEmpty() ? 1 : reservationsExistantes.get(reservationsExistantes.size() - 1).getId() + 1;
+
+        Reservation reservation = new Reservation(id, idClient, idChambre, date);
+        jsonRepository.saveReservation(reservation);
         System.out.println("Réservation ajoutée avec succès !");
     }
 
     static void afficherReservations() {
         System.out.println("Liste des réservations\n--------------------------------------------\n");
-        System.out.println("Id\tIdClient\tIdChambre\tDate");
+        System.out.println("N°\tIdClient\tIdChambre\tDate");
         System.out.println("--\t--------\t---------\t----");
-        if (reservations.isEmpty()) {
+        List<Reservation> reservationsExistantes = jsonRepository.loadReservation();
+        if (reservationsExistantes.isEmpty()) {
             System.out.println("Aucune réservation trouvée.");
         } else {
-            for (Reservations reservation : reservations) {
+            for (Reservation reservation : reservationsExistantes) {
                 System.out.println(reservation);
             }
         }
@@ -69,7 +73,8 @@ public class Reservations {
 
     static void afficherUneReservation(int id) {
         System.out.println("Détails de la réservation\n--------------------------------------------\n");
-        for (Reservations reservation : reservations) {
+        List<Reservation> reservationsExistantes = jsonRepository.loadReservation();
+        for (Reservation reservation : reservationsExistantes) {
             if (reservation.getId() == id) {
                 System.out.println(reservation);
                 return;
@@ -77,7 +82,8 @@ public class Reservations {
         }
         System.out.println("Aucune réservation trouvée avec cet ID.");
     }
-//done
+
+    //done
     static void supprimerReservation(int id) {
         for (int i = 0; i < reservations.size(); i++) {
             if (reservations.get(i).getId() == id) {
@@ -91,6 +97,17 @@ public class Reservations {
 
     @Override
     public String toString() {
-        return "" + id + "\t|" + idClient + "\t\t\t|" + idChambre + "\t\t\t|" + date;
+        ChambreJsonRepository chambreRepo = new ChambreJsonRepository("Chambres.json");
+        List<Chambre> chambres = chambreRepo.loadChambre();
+        Chambre chambreConcernee = chambres.stream()
+                .filter(chambre -> chambre.getId() == idChambre)
+                .findFirst()
+                .orElse(null);
+
+        String detailsChambre = (chambreConcernee != null) ? chambreConcernee.toString() : "Chambre non trouvée";
+
+        return "Numéro de réservation: " + id + "\n" +
+                "Détails de la chambre: " + detailsChambre + "\n" +
+                "Date de réservation: " + date;
     }
 }

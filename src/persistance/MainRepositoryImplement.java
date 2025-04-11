@@ -1,7 +1,7 @@
 package persistance;
 
 import data.Chambre;
-import data.Reservations;
+import data.Reservation;
 import data.Utilisateur;
 
 import java.util.ArrayList;
@@ -19,8 +19,7 @@ public class MainRepositoryImplement implements MainRepository{
     }
 
     @Override
-    public void saveChambre(List<Chambre> chambre) {
-
+    public void saveChambre(Chambre chambre) {
     }
 
     @Override
@@ -29,12 +28,12 @@ public class MainRepositoryImplement implements MainRepository{
     }
 
     @Override
-    public void saveReservation(List<Reservations> reservation) {
+    public void saveReservation(Reservation reservation) {
 
     }
 
     @Override
-    public List<Reservations> loadReservation() {
+    public List<Reservation> loadReservation() {
         return new ArrayList<>();
     }
 }
