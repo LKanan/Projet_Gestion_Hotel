@@ -15,6 +15,7 @@ public class Chambre implements Serializable {
     private String description;
     private String type;
     static Scanner clav = new Scanner(System.in);
+    private static ChambreJsonRepository jsonRepository = new ChambreJsonRepository("chambres.json");
 
     private static List<Chambre> chambres = new ArrayList<>();
 
@@ -48,7 +49,6 @@ public class Chambre implements Serializable {
 
 //    public static void addChamber(String nom, int prix, String description, String type) {
     public static void ajouterChamber() {
-        ChambreJsonRepository jsonRepository = new ChambreJsonRepository("chambres.json");
         String nomChambre;
         int prixChambre;
         String descriptionChambre;
@@ -63,17 +63,16 @@ public class Chambre implements Serializable {
         typeChambre = clav.nextLine();
         System.out.println("Description de la chambre: ");
         descriptionChambre = clav.nextLine();
-
-        if (chambres.size() == 0) {
+        List<Chambre> chambresExistantes = jsonRepository.loadChambre();
+        if (chambresExistantes.size() == 0) {
             int id = 1;
             Chambre chambre = new Chambre(id, nomChambre, prixChambre, descriptionChambre, typeChambre);
-            chambres.add(chambre);
+            jsonRepository.saveChambre(chambre);
         } else {
-            int id = chambres.get(chambres.size() - 1).getId() + 1;
+            int id = chambresExistantes.get(chambresExistantes.size() - 1).getId() + 1;
             Chambre chambre = new Chambre(id, nomChambre, prixChambre, descriptionChambre, typeChambre);
-            chambres.add(chambre);
+            jsonRepository.saveChambre(chambre);
         }
-        jsonRepository.saveChambre(chambres);
         System.out.println("Chambre ajoutée avec succès !\n--------------------------------------------\n");
     }
 
@@ -93,17 +92,19 @@ public class Chambre implements Serializable {
 
     public static void afficherToutesChambres() {
         System.out.println("Liste des chambres\n--------------------------------------------\n");
-        if (chambres.size() == 0) {
+        List<Chambre> chambresExistantes = jsonRepository.loadChambre();
+        if (chambresExistantes.size() == 0) {
             System.out.println("Aucune chambre disponible.");
         }
         else {
-            for (Chambre chambre : chambres) {
+            for (Chambre chambre : chambresExistantes) {
                 System.out.println(chambre.nom + " : " + chambre.prix + "$");
             }
         }
     }
     public static void afficherUneChambre(int id){
-        for (Chambre chambre : chambres) {
+        List<Chambre> chambresExistantes = jsonRepository.loadChambre();
+        for (Chambre chambre : chambresExistantes) {
             if (chambre.getId() == id) {
                 System.out.println(chambre);
             }
