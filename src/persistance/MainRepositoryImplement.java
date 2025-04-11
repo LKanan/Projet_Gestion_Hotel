@@ -19,8 +19,7 @@ public class MainRepositoryImplement implements MainRepository{
     }
 
     @Override
-    public void saveChambre(List<Chambre> chambre) {
-
+    public void saveChambre(Chambre chambre) {
     }
 
     @Override
@@ -29,7 +28,7 @@ public class MainRepositoryImplement implements MainRepository{
     }
 
     @Override
-    public void saveReservation(List<Reservations> reservation) {
+    public void saveReservation(Reservations reservation) {
 
     }
 
