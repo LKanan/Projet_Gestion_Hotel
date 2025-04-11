@@ -69,13 +69,9 @@ public class Admin extends Personne {
                     Chambre.afficherUneChambre(idChambre);
                     break;
                 case 7:
-                    System.out.println("Creer une chambre");
                     Chambre.ajouterChamber();
                     break;
                 case 8:
-                    System.out.println("Supprimer Une Chambre par l'id :");
-                    int idChambreSupprimer = scanner.nextInt();
-                    System.out.println("Entrer l'id de la chambre a supprimer : ");
                     Chambre.supprimerChamber();
                 case 9:
                     System.out.println("Déconnexion réussie. Retour au menu principal.");
