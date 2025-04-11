@@ -26,12 +26,14 @@ public class ChambreJsonRepository extends MainRepositoryImplement {
     }
 
     @Override
-    public void saveChambre(List<Chambre> chambre) {
+    public void saveChambre(Chambre chambre) {
         Path path = Paths.get(fileName);
+        List<Chambre> nouvellecambre = new ArrayList<>();
         List<Chambre> chambresExistantes = loadChambre(); // Charger les chambres existantes
 
         // Ajouter les nouvelles chambres à la liste existante
-        chambresExistantes.addAll(chambre);
+        nouvellecambre.add(chambre);
+        chambresExistantes.addAll(nouvellecambre);
         try (Writer writer = Files.newBufferedWriter(path)) {
             gson.toJson(chambresExistantes, writer);
         } catch (IOException e) {
