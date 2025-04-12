@@ -119,4 +119,9 @@ public class Chambre implements Serializable {
                 "\n\tType: " + type+
                 "\n===============================================\n";
     }
+
+    public int setId(int id){
+        this.id = id;
+        return id;
+    }
 }

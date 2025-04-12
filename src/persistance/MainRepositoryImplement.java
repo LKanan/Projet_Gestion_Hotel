@@ -1,5 +1,6 @@
 package persistance;
 
+import data.Admin;
 import data.Chambre;
 import data.Reservations;
 import data.Utilisateur;
@@ -16,6 +17,16 @@ public class MainRepositoryImplement implements MainRepository{
     @Override
     public List<Utilisateur> loadUser() {
         return new ArrayList<>();
+    }
+
+    @Override
+    public void saveAdmin(List<Admin> admin) {
+
+    }
+
+    @Override
+    public ArrayList<Admin> loadAdmin() {
+        return null;
     }
 
     @Override

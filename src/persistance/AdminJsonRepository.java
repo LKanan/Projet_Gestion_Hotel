@@ -47,28 +47,28 @@ public class AdminJsonRepository implements MainRepository{
     @Override
     public void saveAdmin(List<Admin> adminsToSave) {
         Path path = Paths.get(fileName);
-        List<Admin> existingAdmins = loadAdmin();
+        List<Admin> existingAdmins = loadAdmin(); // Charger les données existantes.
 
-
+        // Trouver l'ID maximum existant
         int maxId = existingAdmins.stream()
                 .mapToInt(Admin::getId)
                 .max()
                 .orElse(0);
 
-        // Filtrer les doublons selon un critère (par exemple, ID ou email)
-        for (Admin adminToSave : adminsToSave) {
+        // Ajouter uniquement les admins non-présents
+        for (Admin admin : adminsToSave) {
             boolean exists = existingAdmins.stream()
-                    .anyMatch(existingAdmin -> existingAdmin.getEmail().equals(adminToSave.getEmail()));
+                    .anyMatch(existingAdmin -> existingAdmin.getEmail().equals(admin.getEmail()));
+
             if (!exists) {
-                // Incrémenter l'ID avant d'ajouter un nouvel admin
-                adminToSave.setId(++maxId);
-                existingAdmins.add(adminToSave);
+                admin.setId(++maxId); // Incrémenter l'ID
+                existingAdmins.add(admin);
             }
         }
 
-        // Écrire la liste mise à jour dans le fichier JSON
+        // Écriture dans le fichier JSON
         try (Writer writer = Files.newBufferedWriter(path)) {
-            gson.toJson(existingAdmins, writer);
+            new GsonBuilder().setPrettyPrinting().create().toJson(existingAdmins, writer);
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de l'enregistrement dans " + fileName, e);
         }

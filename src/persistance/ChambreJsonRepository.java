@@ -26,16 +26,32 @@ public class ChambreJsonRepository extends MainRepositoryImplement {
     }
 
     @Override
-    public void saveChambre(List<Chambre> chambre) {
+    public void saveChambre(List<Chambre> chambresToSave) {
         Path path = Paths.get(fileName);
-        List<Chambre> chambresExistantes = loadChambre(); // Charger les chambres existantes
+        List<Chambre> existingChambres = loadChambre();
 
-        // Ajouter les nouvelles chambres à la liste existante
-        chambresExistantes.addAll(chambre);
+        // Trouver l'ID maximal :
+        int maxId = existingChambres.stream()
+                .mapToInt(Chambre::getId)
+                .max()
+                .orElse(0);
+
+        // Ajouter uniquement les nouvelles chambres (sans doublon)
+        for (Chambre chambre : chambresToSave) {
+            boolean exists = existingChambres.stream()
+                    .anyMatch(existingChambre -> existingChambre.getNom().equals(chambre.getNom()));
+
+            if (!exists) {
+                chambre.setId(++maxId); // Incrémenter l'ID.
+                existingChambres.add(chambre);
+            }
+        }
+
+        // Sauvegarder dans le fichier JSON
         try (Writer writer = Files.newBufferedWriter(path)) {
-            gson.toJson(chambresExistantes, writer);
+            new GsonBuilder().setPrettyPrinting().create().toJson(existingChambres, writer);
         } catch (IOException e) {
-            throw new RuntimeException("Erreur lors de l'enregistrement dans " + fileName, e);
+            throw new RuntimeException("Erreur lors de l'enregistrement des chambres dans " + fileName, e);
         }
     }
 

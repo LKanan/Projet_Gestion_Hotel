@@ -7,11 +7,14 @@ import java.util.Scanner;
 public class Utilisateur extends Personne {
     private static  long serialVersionUID = 1L;
     private String adresse;
+    private String type = "user";
+
     public static List<Utilisateur>  utilisateurList = new ArrayList<>();
 
     public Utilisateur(int id, String nom, String email, String password, String role, String adresse) {
         super(id, nom, email, password, role);
         this.adresse = adresse;
+        this.type = "user";
     }
 
     public String getAdresse() {

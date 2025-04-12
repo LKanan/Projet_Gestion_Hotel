@@ -1,19 +1,11 @@
 [
   {
-    "adresse": "paris",
+    "adresse": "ssss",
+    "type": "user",
     "id": 1,
-    "nom": "user",
-    "email": "user@gmail.com",
-    "password": "P@55word",
-    "role": "USER",
-    "estConnecter": false
-  },
-  {
-    "adresse": "eee",
-    "id": 2,
-    "nom": "eeee",
-    "email": "eeee",
-    "password": "eeee",
+    "nom": "simplice",
+    "email": "simp@gmail.com",
+    "password": "ssss",
     "role": "USER",
     "estConnecter": false
   }
