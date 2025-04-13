@@ -1,7 +1,7 @@
 package persistance;
 
 import data.Chambre;
-import data.Reservation;
+import data.Reservations;
 import data.Utilisateur;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public interface MainRepository {
 
     public List<Chambre> loadChambre();
 
-    void saveReservation(Reservation reservation);
+    void saveReservation(List<Reservations> reservation);
 
-    public List<Reservation> loadReservation();
+    public List<Reservations> loadReservation();
 }

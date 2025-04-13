@@ -1,0 +1,22 @@
+[
+  {
+    "type": "admin",
+    "matricule": "ADM001",
+    "id": 1,
+    "nom": "rooney",
+    "email": "admin",
+    "password": "12345",
+    "role": "ADMIN",
+    "estConnecter": false
+  },
+  {
+    "type": "admin",
+    "matricule": "eeee",
+    "id": 2,
+    "nom": "rooney",
+    "email": "eeee",
+    "password": "eeee",
+    "role": "ADMIN",
+    "estConnecter": false
+  }
+]

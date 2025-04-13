@@ -1,8 +1,10 @@
 package data;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Personne {
+public abstract class Personne implements Serializable {
+    private static  long serialVersionUID = 1L;
     private int id;
     private String nom;
     private String email;

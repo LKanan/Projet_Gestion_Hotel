@@ -1,14 +1,21 @@
 package data;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
 public class Admin extends Personne {
+
+    private static  long serialVersionUID = 1L;
+    private String type = "admin";
+
     private String matricule;
 
     public Admin(int id, String nom, String email, String password, String role, String matricule) {
         super(id, nom, email, password, role);
         this.matricule = matricule;
+        this.type = "admin";
+
     }
 
     public String getMatricule() {
@@ -82,5 +89,14 @@ public class Admin extends Personne {
             }
         }
     }
+
+    public String getType() { // Ajouter un getter pour le champ "type"
+        return type;
+    }
+
+    public void setType(String type) { // Ajouter un setter pour le champ "type"
+        this.type = type;
+    }
+
 
 }

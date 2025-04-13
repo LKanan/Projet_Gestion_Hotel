@@ -1,0 +1,22 @@
+[
+  {
+    "adresse": "ssss",
+    "type": "user",
+    "id": 1,
+    "nom": "simplice",
+    "email": "simp@gmail.com",
+    "password": "ssss",
+    "role": "USER",
+    "estConnecter": false
+  },
+  {
+    "adresse": "ig",
+    "type": "user",
+    "id": 2,
+    "nom": "ignace",
+    "email": "ig@gmail.com",
+    "password": "ig",
+    "role": "USER",
+    "estConnecter": false
+  }
+]

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ChambreJsonRepository extends MainRepositoryImplement {
     private final String fileName;
-    public final Gson gson;
+    private final Gson gson;
 
     public ChambreJsonRepository(String fileName) {
         this.fileName = fileName;

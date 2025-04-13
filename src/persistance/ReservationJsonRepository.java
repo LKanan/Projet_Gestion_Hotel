@@ -3,7 +3,7 @@ package persistance;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
-import data.Reservation;
+import data.Reservations;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -25,10 +25,10 @@ public class ReservationJsonRepository extends MainRepositoryImplement {
     }
 
     @Override
-    public void saveReservation(Reservation reservation) {
+    public void saveReservation(Reservations reservation) {
         Path path = Paths.get(fileName);
-        List<Reservation> nouvellesReservations = new ArrayList<>();
-        List<Reservation> reservationsExistantes = loadReservation(); // Charger les réservations existantes
+        List<Reservations> nouvellesReservations = new ArrayList<>();
+        List<Reservations> reservationsExistantes = loadReservation(); // Charger les réservations existantes
 
         // Ajouter la nouvelle réservation à la liste existante
         nouvellesReservations.add(reservation);
@@ -41,14 +41,14 @@ public class ReservationJsonRepository extends MainRepositoryImplement {
     }
 
     @Override
-    public List<Reservation> loadReservation() {
+    public List<Reservations> loadReservation() {
         Path path = Paths.get(fileName);
 
         if (!Files.exists(path)) {
             return new ArrayList<>();
         }
         try (Reader reader = Files.newBufferedReader(path)) {
-            Reservation[] reservationArray = gson.fromJson(reader, Reservation[].class);
+            Reservations[] reservationArray = gson.fromJson(reader, Reservations[].class);
 
             if (reservationArray == null) {
                 return new ArrayList<>();
