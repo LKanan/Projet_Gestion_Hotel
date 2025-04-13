@@ -2,19 +2,24 @@ package data;
 
 import persistance.ChambreJsonRepository;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Chambre implements Serializable {
-    private static  long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
     private int id;
     private String nom;
     private int prix;
     private String description;
     private String type;
     static Scanner clav = new Scanner(System.in);
+    private static ChambreJsonRepository jsonRepository = new ChambreJsonRepository("Chambres.json");
 
     private static List<Chambre> chambres = new ArrayList<>();
 
@@ -46,9 +51,8 @@ public class Chambre implements Serializable {
         return type;
     }
 
-//    public static void addChamber(String nom, int prix, String description, String type) {
+    //    public static void addChamber(String nom, int prix, String description, String type) {
     public static void ajouterChamber() {
-        ChambreJsonRepository jsonRepository = new ChambreJsonRepository("chambres.json");
         String nomChambre;
         int prixChambre;
         String descriptionChambre;
@@ -63,47 +67,59 @@ public class Chambre implements Serializable {
         typeChambre = clav.nextLine();
         System.out.println("Description de la chambre: ");
         descriptionChambre = clav.nextLine();
-
-        if (chambres.size() == 0) {
+        List<Chambre> chambresExistantes = jsonRepository.loadChambre();
+        if (chambresExistantes.size() == 0) {
             int id = 1;
             Chambre chambre = new Chambre(id, nomChambre, prixChambre, descriptionChambre, typeChambre);
-            chambres.add(chambre);
+            jsonRepository.saveChambre(chambre);
         } else {
-            int id = chambres.get(chambres.size() - 1).getId() + 1;
+            int id = chambresExistantes.get(chambresExistantes.size() - 1).getId() + 1;
             Chambre chambre = new Chambre(id, nomChambre, prixChambre, descriptionChambre, typeChambre);
-            chambres.add(chambre);
+            jsonRepository.saveChambre(chambre);
         }
-        jsonRepository.saveChambre(chambres);
         System.out.println("Chambre ajoutée avec succès !\n--------------------------------------------\n");
     }
 
     public static void supprimerChamber() {
         System.out.println("Suppression d'une chambre\n--------------------------------------------\n");
-        System.out.println("Entrez le numero de la chambre à supprimer: ");
+        System.out.println("Entrez le numéro de la chambre à supprimer: ");
         int id = clav.nextInt();
-        for (int i = 0; i < chambres.size(); i++) {
-            if (chambres.get(i).getId() == id) {
-                chambres.remove(i);
-                System.out.println("Chambre supprimée avec succès !");
-                return;
+        clav.nextLine(); // Consommer le caractère de nouvelle ligne
+
+        // Charger les chambres existantes depuis le fichier JSON
+        List<Chambre> chambresExistantes = jsonRepository.loadChambre();
+
+        // Rechercher et supprimer la chambre correspondante
+        boolean chambreSupprimee = chambresExistantes.removeIf(chambre -> chambre.getId() == id);
+
+        if (chambreSupprimee) {
+            // Sauvegarder la liste mise à jour dans le fichier JSON
+            try (Writer writer = Files.newBufferedWriter(Paths.get("Chambres.json"))) {
+                jsonRepository.gson.toJson(chambresExistantes, writer);
+            } catch (IOException e) {
+                throw new RuntimeException("Erreur lors de la mise à jour du fichier JSON", e);
             }
+            System.out.println("Chambre supprimée avec succès !");
+        } else {
+            System.out.println("Aucune chambre trouvée avec cet ID.");
         }
-        System.out.println("Aucune réservation trouvée avec cet ID.");
     }
 
     public static void afficherToutesChambres() {
         System.out.println("Liste des chambres\n--------------------------------------------\n");
-        if (chambres.size() == 0) {
+        List<Chambre> chambresExistantes = jsonRepository.loadChambre();
+        if (chambresExistantes.size() == 0) {
             System.out.println("Aucune chambre disponible.");
-        }
-        else {
-            for (Chambre chambre : chambres) {
+        } else {
+            for (Chambre chambre : chambresExistantes) {
                 System.out.println(chambre.nom + " : " + chambre.prix + "$");
             }
         }
     }
-    public static void afficherUneChambre(int id){
-        for (Chambre chambre : chambres) {
+
+    public static void afficherUneChambre(int id) {
+        List<Chambre> chambresExistantes = jsonRepository.loadChambre();
+        for (Chambre chambre : chambresExistantes) {
             if (chambre.getId() == id) {
                 System.out.println(chambre);
             }
@@ -116,7 +132,7 @@ public class Chambre implements Serializable {
                 "\n\tNom: " + nom +
                 "\n\tPrix: " + prix + "$" +
                 "\n\tDescription: " + description +
-                "\n\tType: " + type+
+                "\n\tType: " + type +
                 "\n===============================================\n";
     }
 
