@@ -1,8 +1,7 @@
 package persistance;
 
-import data.*;
 import data.Chambre;
-import data.Reservation;
+import data.Reservations;
 import data.Utilisateur;
 
 import java.util.List;

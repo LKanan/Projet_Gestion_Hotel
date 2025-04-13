@@ -1,5 +1,7 @@
 package data;
 
+import persistance.ChambreJsonRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +12,7 @@ public class Utilisateur extends Personne {
     private String type = "user";
 
     public static List<Utilisateur>  utilisateurList = new ArrayList<>();
+    ChambreJsonRepository chambreJsonRepository = new ChambreJsonRepository("chambres.json");
 
     public Utilisateur(int id, String nom, String email, String password, String role, String adresse) {
         super(id, nom, email, password, role);
@@ -49,23 +52,23 @@ public class Utilisateur extends Personne {
                     break;
                 case 2:
                     System.out.println("\n\t Faire Une Reservation \n\t ---------------------- \n\t ");
-                    Reservation.ajouterReservation(this.getId());
+                    Reservations.ajouterReservation(this.getId());
                     break;
                 case 3:
                     System.out.println("\n\t Mes Reservations \n\t ---------------------- \n\t ");
-                    Reservation.afficherReservations();
+                    Reservations.afficherReservations();
                     break;
                 case 4:
                     System.out.println("\n\t Afficher Une Reservation \n\t ---------------------- \n\t ");
                     System.out.println("Saisissez le numero de la reservation");
                     int idReservation = scanner.nextInt();
-                    Reservation.afficherUneReservation(idReservation);
+                    Reservations.afficherUneReservation(idReservation);
                     break;
 
                 case 5:
                     System.out.println("\n\t Supprimer Une Reservation \n\t ---------------------- \n\t ");
                     int idReservationSupprimer = scanner.nextInt();
-                    Reservation.supprimerReservation(idReservationSupprimer);
+                    Reservations.supprimerReservation(idReservationSupprimer);
                     break;
 
                 case 6:

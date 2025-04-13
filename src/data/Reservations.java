@@ -9,17 +9,17 @@ import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
 
-public class Reservation implements Serializable {
+public class Reservations implements Serializable {
     private static long serialVersionUID = 1L;
     private int id;
     private int idClient;
     private int idChambre;
     private LocalDate date;
-    private static List<Reservation> reservations = new ArrayList<>();
+    private static List<Reservations> reservations = new ArrayList<>();
     private static Scanner clav = new Scanner(System.in);
     private static ReservationJsonRepository jsonRepository = new ReservationJsonRepository("Reservations.json");
 
-    private Reservation(int id, int idClient, int idChambre, LocalDate date) {
+    private Reservations(int id, int idClient, int idChambre, LocalDate date) {
         this.id = id;
         this.idClient = idClient;
         this.idChambre = idChambre;
@@ -49,10 +49,10 @@ public class Reservation implements Serializable {
         clav.nextLine(); // Consommer le caractère de nouvelle ligne
         LocalDate date = LocalDate.now();
 
-        List<Reservation> reservationsExistantes = jsonRepository.loadReservation();
+        List<Reservations> reservationsExistantes = jsonRepository.loadReservation();
         int id = reservationsExistantes.isEmpty() ? 1 : reservationsExistantes.get(reservationsExistantes.size() - 1).getId() + 1;
 
-        Reservation reservation = new Reservation(id, idClient, idChambre, date);
+        Reservations reservation = new Reservations(id, idClient, idChambre, date);
         jsonRepository.saveReservation(reservation);
         System.out.println("Réservation ajoutée avec succès !");
     }
@@ -61,11 +61,11 @@ public class Reservation implements Serializable {
         System.out.println("Liste des réservations\n--------------------------------------------\n");
         System.out.println("N°\tIdClient\tIdChambre\tDate");
         System.out.println("--\t--------\t---------\t----");
-        List<Reservation> reservationsExistantes = jsonRepository.loadReservation();
+        List<Reservations> reservationsExistantes = jsonRepository.loadReservation();
         if (reservationsExistantes.isEmpty()) {
             System.out.println("Aucune réservation trouvée.");
         } else {
-            for (Reservation reservation : reservationsExistantes) {
+            for (Reservations reservation : reservationsExistantes) {
                 System.out.println(reservation);
             }
         }
@@ -73,8 +73,8 @@ public class Reservation implements Serializable {
 
     static void afficherUneReservation(int id) {
         System.out.println("Détails de la réservation\n--------------------------------------------\n");
-        List<Reservation> reservationsExistantes = jsonRepository.loadReservation();
-        for (Reservation reservation : reservationsExistantes) {
+        List<Reservations> reservationsExistantes = jsonRepository.loadReservation();
+        for (Reservations reservation : reservationsExistantes) {
             if (reservation.getId() == id) {
                 System.out.println(reservation);
                 return;
