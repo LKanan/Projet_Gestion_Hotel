@@ -1,5 +1,7 @@
 .idea/
-
+Admin.json
+User.json
+Reservations.json
 ### IntelliJ IDEA ###
 out/
         !**/src/main/**/out/

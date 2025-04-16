@@ -3,6 +3,7 @@ package persistance;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import data.Admin;
 import data.Reservations;
 
 import java.io.*;
@@ -38,6 +39,16 @@ public class ReservationJsonRepository extends MainRepositoryImplement {
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de l'enregistrement dans " + fileName, e);
         }
+    }
+
+    @Override
+    public void saveAdmin(List<Admin> adminsToSave) {
+
+    }
+
+    @Override
+    public ArrayList<Admin> loadAdmin() {
+        return null;
     }
 
     @Override

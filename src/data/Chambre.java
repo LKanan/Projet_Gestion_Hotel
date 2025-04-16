@@ -23,7 +23,7 @@ public class Chambre implements Serializable {
 
     private static List<Chambre> chambres = new ArrayList<>();
 
-    private Chambre(int id, String nom, int prix, String description, String type) {
+    public Chambre(int id, String nom, int prix, String description, String type) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;

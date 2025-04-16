@@ -19,7 +19,7 @@ public class Reservations implements Serializable {
     private static Scanner clav = new Scanner(System.in);
     private static ReservationJsonRepository jsonRepository = new ReservationJsonRepository("Reservations.json");
 
-    private Reservations(int id, int idClient, int idChambre, LocalDate date) {
+    public Reservations(int id, int idClient, int idChambre, LocalDate date) {
         this.id = id;
         this.idClient = idClient;
         this.idChambre = idChambre;

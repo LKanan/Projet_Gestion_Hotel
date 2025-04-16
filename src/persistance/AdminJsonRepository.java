@@ -45,6 +45,11 @@ public class AdminJsonRepository implements MainRepository{
     }
 
     @Override
+    public void saveChambre(Chambre chambre) {
+
+    }
+
+    @Override
     public void saveAdmin(List<Admin> adminsToSave) {
         Path path = Paths.get(fileName);
         List<Admin> existingAdmins = loadAdmin(); // Charger les données existantes.
@@ -99,10 +104,6 @@ public class AdminJsonRepository implements MainRepository{
         }
     }
 
-    @Override
-    public void saveChambre(List<Chambre> chambre) {
-
-    }
 
     @Override
     public List<Chambre> loadChambre() {
