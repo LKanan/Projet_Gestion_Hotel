@@ -1,7 +1,4 @@
 .idea/
-Admin.json
-User.json
-Reservations.json
 ### IntelliJ IDEA ###
 out/
         !**/src/main/**/out/
@@ -52,11 +49,10 @@ bin/
 *.zip
 *.tar.gz
 *.rar
+*.json
+*.db
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-Chambres.json
-Reservations.json
-Admin.jon
-user.json
+
