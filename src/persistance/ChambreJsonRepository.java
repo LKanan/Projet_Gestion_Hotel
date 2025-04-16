@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
+import data.Admin;
 import data.Chambre;
+import data.Reservations;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -16,7 +18,7 @@ import java.util.List;
 
 public class ChambreJsonRepository extends MainRepositoryImplement {
     private final String fileName;
-    private final Gson gson;
+    public final Gson gson;
 
     public ChambreJsonRepository(String fileName) {
         this.fileName = fileName;
@@ -42,6 +44,16 @@ public class ChambreJsonRepository extends MainRepositoryImplement {
     }
 
     @Override
+    public void saveAdmin(List<Admin> adminsToSave) {
+
+    }
+
+    @Override
+    public ArrayList<Admin> loadAdmin() {
+        return null;
+    }
+
+    @Override
     public List<Chambre> loadChambre() {
         Path path = Paths.get(fileName);
 
@@ -61,5 +73,10 @@ public class ChambreJsonRepository extends MainRepositoryImplement {
         } catch (JsonSyntaxException e) {
             throw new RuntimeException("Format JSON invalide dans " + fileName, e);
         }
+    }
+
+    @Override
+    public void saveReservation(Reservations reservation) {
+
     }
 }

@@ -7,7 +7,7 @@ import data.Utilisateur;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainRepositoryImplement implements MainRepository{
+public abstract class MainRepositoryImplement implements MainRepository{
     @Override
     public void saveUser(List<Utilisateur> user) {
 
@@ -32,6 +32,8 @@ public class MainRepositoryImplement implements MainRepository{
 
     }
 
+
+    public abstract void saveReservation(Reservations reservation);
 
     @Override
     public List<Reservations> loadReservation() {

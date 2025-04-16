@@ -82,6 +82,12 @@ public class UserJsonRepository implements MainRepository{
             throw new RuntimeException("Erreur lors du chargement des utilisateurs à partir de " + fileName, e);
         }
     }
+
+    @Override
+    public void saveChambre(Chambre chambre) {
+
+    }
+
     @Override
     public void saveAdmin(List<Admin> admin) {
 
@@ -93,10 +99,7 @@ public class UserJsonRepository implements MainRepository{
     }
 
 
-    @Override
-    public void saveChambre(List<Chambre> chambre) {
 
-    }
 
     @Override
     public List<Chambre> loadChambre() {

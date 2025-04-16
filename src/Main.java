@@ -2,7 +2,9 @@ import data.Admin;
 import data.Personne;
 import data.Utilisateur;
 import persistance.AdminJsonRepository;
+import persistance.AdminSQLiteRepository;
 import persistance.UserJsonRepository;
+import persistance.UserSQLiteRepository;
 
 
 import java.util.ArrayList;
@@ -19,13 +21,16 @@ public class Main {
     }
 
     public static void affichageMenuPrincipal() {
-        AdminJsonRepository adminJsonRepository = new AdminJsonRepository("Admin.json");
-        UserJsonRepository userJsonRepository = new UserJsonRepository("User.json");
+//        AdminJsonRepository adminJsonRepository = new AdminJsonRepository("Admin.json");
+//        UserJsonRepository userJsonRepository = new UserJsonRepository("User.json");
+        UserSQLiteRepository userSQLiteRepository = new UserSQLiteRepository("Hotel.db");
+        AdminSQLiteRepository adminSQLiteRepository = new AdminSQLiteRepository("Hotel.db");
+
         List<Admin> adminList = new ArrayList<>();
         List<Utilisateur> userList = new ArrayList<>();
 
         adminList.add(new Admin(1, "rooney", "admin", "12345", "ADMIN", "ADM001"));
-        Utilisateur.utilisateurList.add(new Utilisateur(1, "user", "user@gmail.com", "P@55word", "USER", "paris"));
+        Utilisateur.utilisateurList.add(new Utilisateur(1, "user", "admin@admin.gmail", "P@55word", "USER", "paris"));
 
         Scanner scanner = new Scanner(System.in);
 
@@ -46,7 +51,7 @@ public class Main {
                     String password = scanner.nextLine();
 
                     Personne personne = new Personne() {
-                    }.seConnecter(adminList = adminJsonRepository.loadAdmin(),Utilisateur.utilisateurList =userJsonRepository.loadUser(), email, password);
+                    }.seConnecter(adminList = adminSQLiteRepository.loadAdmin(),Utilisateur.utilisateurList =userSQLiteRepository.loadUser(), email, password);
 
                     if (personne != null) {
                         if (personne instanceof Admin) {
@@ -73,13 +78,14 @@ public class Main {
                         System.out.print("Matricule : ");
                         String matricule = scanner.nextLine();
                         adminList.add(new Admin(adminList.size() + 1, nom, nouveauEmail, nouveauPassword, "ADMIN", matricule));
-                        adminJsonRepository.saveAdmin(adminList);
+                        adminSQLiteRepository.saveAdmin(adminList);
                         System.out.println("Compte administrateur créé !");
                     } else {
                         System.out.print("Adresse : ");
                         String adresse = scanner.nextLine();
                         Utilisateur.utilisateurList.add(new Utilisateur(Utilisateur.utilisateurList.size() + 1, nom, nouveauEmail, nouveauPassword, "USER", adresse));
-                        userJsonRepository.saveUser(Utilisateur.utilisateurList);
+//                        userJsonRepository.saveUser(Utilisateur.utilisateurList);
+                        userSQLiteRepository.saveUser(Utilisateur.utilisateurList);
                         System.out.println("Compte utilisateur créé !");
                     }
                     break;
