@@ -19,16 +19,17 @@ public class ReservationSQLiteRepository {
     }
 
     // Méthode pour sauvegarder une réservation
-    public void saveReservation(List<Reservations> reservationsToSave) {
+    public void saveReservation(Reservations reservation) {
         String insertReservationQuery = """
-            INSERT INTO Reservations (idClient, idChambre, date)
+            INSERT INTO Reservation (idClient, idChambre, date)
             VALUES (?, ?, ?)
         """;
-
+//        List<Reservations> reservations = new ArrayList<>();
+//        reservations.add(reservation);
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseUrl);
              PreparedStatement insertStmt = connection.prepareStatement(insertReservationQuery)) {
 
-            for (Reservations reservation : reservationsToSave) {
+//            for (Reservations reservation : reservationsToSave) {
                 try {
                     insertStmt.setInt(1, reservation.getIdClient());
                     insertStmt.setInt(2, reservation.getIdChambre());
@@ -38,7 +39,7 @@ public class ReservationSQLiteRepository {
                     System.err.println("Erreur lors de l'insertion de la réservation pour le client ID : "
                             + reservation.getIdClient() + ". Message : " + e.getMessage());
                 }
-            }
+//            }
 
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de l'enregistrement des réservations dans la base de données", e);
@@ -48,7 +49,7 @@ public class ReservationSQLiteRepository {
     // Méthode pour charger toutes les réservations
     public List<Reservations> loadReservation() {
         List<Reservations> reservations = new ArrayList<>();
-        String query = "SELECT * FROM Reservations";
+        String query = "SELECT * FROM Reservation";
 
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseUrl);
              Statement statement = connection.createStatement();
