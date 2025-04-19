@@ -1,7 +1,9 @@
 package data;
 
 import persistance.ChambreJsonRepository;
+import persistance.ChambreSQLiteRepository;
 import persistance.ReservationJsonRepository;
+import persistance.ReservationSQLiteRepository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,9 +19,17 @@ public class Reservations implements Serializable {
     private LocalDate date;
     private static List<Reservations> reservations = new ArrayList<>();
     private static Scanner clav = new Scanner(System.in);
-    private static ReservationJsonRepository jsonRepository = new ReservationJsonRepository("Reservations.json");
+    static private ReservationSQLiteRepository reservationSQLiteRepository = new ReservationSQLiteRepository("Hotel.db");
+//    private static ReservationJsonRepository jsonRepository = new ReservationJsonRepository("Reservations.json");
 
     public Reservations(int id, int idClient, int idChambre, LocalDate date) {
+        this.id = id;
+        this.idClient = idClient;
+        this.idChambre = idChambre;
+        this.date = date;
+    }
+
+    public Reservations(int idClient, int idChambre, LocalDate date) {
         this.id = id;
         this.idClient = idClient;
         this.idChambre = idChambre;
@@ -49,11 +59,11 @@ public class Reservations implements Serializable {
         clav.nextLine(); // Consommer le caractère de nouvelle ligne
         LocalDate date = LocalDate.now();
 
-        List<Reservations> reservationsExistantes = jsonRepository.loadReservation();
-        int id = reservationsExistantes.isEmpty() ? 1 : reservationsExistantes.get(reservationsExistantes.size() - 1).getId() + 1;
+        List<Reservations> reservationsExistantes = reservationSQLiteRepository.loadReservation();
 
-        Reservations reservation = new Reservations(id, idClient, idChambre, date);
-        jsonRepository.saveReservation(reservation);
+        Reservations reservation = new Reservations(idClient, idChambre, date);
+        reservationSQLiteRepository.saveReservation(reservation);
+//        jsonRepository.saveReservation(reservation);
         System.out.println("Réservation ajoutée avec succès !");
     }
 
@@ -61,7 +71,7 @@ public class Reservations implements Serializable {
         System.out.println("Liste des réservations\n--------------------------------------------\n");
         System.out.println("N°\tIdClient\tIdChambre\tDate");
         System.out.println("--\t--------\t---------\t----");
-        List<Reservations> reservationsExistantes = jsonRepository.loadReservation();
+        List<Reservations> reservationsExistantes = reservationSQLiteRepository.loadReservation();
         if (reservationsExistantes.isEmpty()) {
             System.out.println("Aucune réservation trouvée.");
         } else {
@@ -73,7 +83,7 @@ public class Reservations implements Serializable {
 
     static void afficherUneReservation(int id) {
         System.out.println("Détails de la réservation\n--------------------------------------------\n");
-        List<Reservations> reservationsExistantes = jsonRepository.loadReservation();
+        List<Reservations> reservationsExistantes = reservationSQLiteRepository.loadReservation();
         for (Reservations reservation : reservationsExistantes) {
             if (reservation.getId() == id) {
                 System.out.println(reservation);
@@ -97,8 +107,8 @@ public class Reservations implements Serializable {
 
     @Override
     public String toString() {
-        ChambreJsonRepository chambreRepo = new ChambreJsonRepository("Chambres.json");
-        List<Chambre> chambres = chambreRepo.loadChambre();
+        ChambreSQLiteRepository chambreSQLiteRepository = new ChambreSQLiteRepository("Hotel.db");
+        List<Chambre> chambres = chambreSQLiteRepository.loadChambre();
         Chambre chambreConcernee = chambres.stream()
                 .filter(chambre -> chambre.getId() == idChambre)
                 .findFirst()
