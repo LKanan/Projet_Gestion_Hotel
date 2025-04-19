@@ -17,7 +17,7 @@ public interface MainRepository {
 
     void saveAdmin(List<Admin> adminsToSave);
 
-    ArrayList<Admin> loadAdmin();
+    public List<Admin> loadAdmin();
 
     public List<Chambre> loadChambre();
 
