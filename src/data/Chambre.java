@@ -91,24 +91,9 @@ public class Chambre implements Serializable {
         System.out.println("Entrez le numéro de la chambre à supprimer: ");
         int id = clav.nextInt();
         clav.nextLine(); // Consommer le caractère de nouvelle ligne
-
-        // Charger les chambres existantes depuis le fichier JSON
-        List<Chambre> chambresExistantes = chambreSQLiteRepository.loadChambre();
-
-        // Rechercher et supprimer la chambre correspondante
-        boolean chambreSupprimee = chambresExistantes.removeIf(chambre -> chambre.getId() == id);
-
-        if (chambreSupprimee) {
-            // Sauvegarder la liste mise à jour dans le fichier JSON
-//            try (Writer writer = Files.newBufferedWriter(Paths.get("Chambres.json"))) {
-//                jsonRepository.gson.toJson(chambresExistantes, writer);
-//            } catch (IOException e) {
-//                throw new RuntimeException("Erreur lors de la mise à jour du fichier JSON", e);
-//            }
+        ChambreSQLiteRepository chambreSQLiteRepository = new ChambreSQLiteRepository("Hotel.db");
+        chambreSQLiteRepository.deleteChambre(id);
             System.out.println("Chambre supprimée avec succès !");
-        } else {
-            System.out.println("Aucune chambre trouvée avec cet ID.");
-        }
     }
 
     public static void afficherToutesChambres() {

@@ -71,4 +71,21 @@ public class ReservationSQLiteRepository {
 
         return reservations;
     }
+
+    public boolean deleteReservation(int id) {
+        String deleteReservationQuery = "DELETE FROM Reservation WHERE id = ?";
+        boolean isDeleted = false;
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseUrl);
+             PreparedStatement deleteStmt = connection.prepareStatement(deleteReservationQuery)) {
+
+            deleteStmt.setInt(1, id);
+            deleteStmt.executeUpdate();
+            isDeleted = true;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la suppression de la réservation dans la base de données", e);
+        }
+        finally {
+            return isDeleted;
+        }
+    }
 }

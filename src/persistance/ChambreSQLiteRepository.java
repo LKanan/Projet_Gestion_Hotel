@@ -66,4 +66,18 @@ public class ChambreSQLiteRepository {
 
         return chambres;
     }
+
+    public void deleteChambre(int id) {
+        String deleteChambreQuery = "DELETE FROM Chambre WHERE id = ?";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseUrl);
+             PreparedStatement deleteStmt = connection.prepareStatement(deleteChambreQuery)) {
+
+            deleteStmt.setInt(1, id);
+            deleteStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la suppression de la chambre avec l'ID " + id, e);
+        }
+    }
 }

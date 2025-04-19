@@ -95,14 +95,12 @@ public class Reservations implements Serializable {
 
     //done
     static void supprimerReservation(int id) {
-        for (int i = 0; i < reservations.size(); i++) {
-            if (reservations.get(i).getId() == id) {
-                reservations.remove(i);
+
+        boolean isDeleted = reservationSQLiteRepository.deleteReservation(id);
+        if (isDeleted){
                 System.out.println("Réservation supprimée avec succès !");
-                return;
             }
-        }
-        System.out.println("Aucune réservation trouvée avec cet ID.");
+        else System.out.println("Aucune réservation trouvée avec cet ID.");
     }
 
     @Override
