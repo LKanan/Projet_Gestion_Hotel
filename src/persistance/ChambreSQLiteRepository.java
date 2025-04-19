@@ -19,19 +19,23 @@ public class ChambreSQLiteRepository {
 
     public void saveChambre(Chambre chambre) {
         String insertChambreQuery = """
-            INSERT INTO Chambre (nom,prix,description, type)
+            INSERT INTO Chambre (nom, prix, description, type)
             VALUES (?, ?, ?, ?)
         """;
 
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseUrl);
              PreparedStatement insertStmt = connection.prepareStatement(insertChambreQuery)) {
 
-            insertStmt.setString(1, chambre.getNom());
-            insertStmt.setInt(2, chambre.getPrix());
-            insertStmt.setString(3, chambre.getDescription());
-            insertStmt.setString(2, chambre.getType());
-            insertStmt.executeUpdate();
-
+            try {
+                insertStmt.setString(1, chambre.getNom());
+                insertStmt.setInt(2, chambre.getPrix());
+                insertStmt.setString(3, chambre.getDescription());
+                insertStmt.setString(4, chambre.getType());
+                insertStmt.executeUpdate();
+            }catch (SQLException e) {
+                System.err.println("Erreur lors de l'insertion de la chambre : "
+                        + chambre.getNom() + ". Message : " + e.getMessage());
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de l'enregistrement de la chambre dans la base de données", e);
         }

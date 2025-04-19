@@ -1,6 +1,7 @@
 package data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,6 +11,8 @@ public class Admin extends Personne {
     private String type = "admin";
 
     private String matricule;
+
+    public static List<Admin>  adminList = new ArrayList<>();
 
     public Admin(int id, String nom, String email, String password, String role, String matricule) {
         super(id, nom, email, password, role);
@@ -96,6 +99,14 @@ public class Admin extends Personne {
 
     public void setType(String type) { // Ajouter un setter pour le champ "type"
         this.type = type;
+    }
+
+    public static void afficherUnSeulAdmin(int id){
+        for (Admin admin : adminList) {
+            if (admin.getId() == id) {
+                System.out.println(admin);
+            }
+        }
     }
 
 

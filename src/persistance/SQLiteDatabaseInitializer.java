@@ -75,13 +75,14 @@ public class SQLiteDatabaseInitializer {
         String createTableChambre = """
         CREATE TABLE IF NOT EXISTS Chambre (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            numero INTEGER NOT NULL UNIQUE,
-            type TEXT NOT NULL,
-            etat TEXT NOT NULL
+            nom TEXT NOT NULL UNIQUE,
+            prix INTEGER NOT NULL UNIQUE,
+            description TEXT NOT NULL,
+            type TEXT NOT NULL
         );
     """;
         String createTableReservations = """
-        CREATE TABLE IF NOT EXISTS Reservations (
+        CREATE TABLE IF NOT EXISTS Reservation (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             idClient INTEGER NOT NULL,
             idChambre INTEGER NOT NULL,
