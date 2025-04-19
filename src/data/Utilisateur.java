@@ -80,6 +80,9 @@ public class Utilisateur extends Personne {
             }
         }
     }
+    public String getType() { // Ajouter un getter pour le champ "type"
+        return type;
+    }
 
     public static void afficherUnSeulClient(int id){
         for (Utilisateur utilisateur : utilisateurList) {
