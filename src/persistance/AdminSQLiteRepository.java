@@ -47,8 +47,8 @@ public class AdminSQLiteRepository implements MainRepository {
     }
 
     @Override
-    public ArrayList<Admin> loadAdmin() {
-        ArrayList<Admin> admins = new ArrayList<>();
+    public List<Admin> loadAdmin() {
+        List<Admin> admins = new ArrayList<>();
         String query = "SELECT * FROM Admin";
 
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseUrl);
