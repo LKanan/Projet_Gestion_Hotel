@@ -67,6 +67,7 @@ public class Utilisateur extends Personne {
 
                 case 5:
                     System.out.println("\n\t Supprimer Une Reservation \n\t ---------------------- \n\t ");
+                    System.out.println("Saisissez le numero de la reservation a effacer ");
                     int idReservationSupprimer = scanner.nextInt();
                     Reservations.supprimerReservation(idReservationSupprimer);
                     break;
